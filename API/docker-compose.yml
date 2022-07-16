@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: "postgres:14.1-alpine" # use latest official postgres version
+    env_file:
+      - database.env # configure postgres
+    ports: 
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data/ 
+      - ~/Desktop/pg_data/:/pg_data/
+      # persist data even if container shuts down
+volumes:
+  db:
+    driver: local # named volumes can be managed easier using docker-compose
